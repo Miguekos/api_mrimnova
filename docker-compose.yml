@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: "2"
+services:
+  app:
+    container_name: api_mrinnova
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "9467:8000"
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: .
+      dockerfile: Postgres.Dockerfile
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    volumes:
+      - postgres_data_api_mrinnova_backend:/var/lib/postgresql/data/
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8182:8080
+
+volumes:
+  postgres_data_api_mrinnova_backend:
