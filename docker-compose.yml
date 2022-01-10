@@ -27,7 +27,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8182:8080
+      - 8382:8080
 
 volumes:
   postgres_data_api_mrinnova_backend:
