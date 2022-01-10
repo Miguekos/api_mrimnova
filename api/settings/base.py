@@ -34,7 +34,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://95.111.235.214',
-    'http://95.111.235.214:9567',
+    'http://95.111.235.214:9467',
     'https://api.apps.com.pe',
     'https://store.apps.com.pe'
 
@@ -45,7 +45,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://127.0.0.1:8080',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'http://95.111.235.214:9567',
+    'http://95.111.235.214:9467',
     'http://95.111.235.214',
     'https://api.apps.com.pe',
     'https://store.apps.com.pe'
