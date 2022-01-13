@@ -22,5 +22,6 @@ urlpatterns = [
     re_path('', include('applications.inventario.routes')),
     re_path('', include('applications.basededatos.routes')),
     re_path('', include('applications.gestionhumana.routes')),
+    re_path('', include('applications.venta.routes'))
 
 ]

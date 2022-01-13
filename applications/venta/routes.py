@@ -7,7 +7,7 @@ from . import viewssets
 
 router = DefaultRouter()
 
-router.register(r'mrinnova/v2/clientes', viewssets.ClintesViewsetNew, basename='clientes')
+router.register(r'mrinnova/v2/ventas', viewssets.VentasViewsetNew, basename='ventas')
 
 urlpatterns = router.urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

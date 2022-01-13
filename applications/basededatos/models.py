@@ -1,5 +1,8 @@
 from django.db import models
 from applications.inventario.models import ProductModel, ServiceModel
+from .managers import ClientManager
+
+
 # Create your models here.
 
 class ClientModelOld(models.Model):
@@ -29,6 +32,7 @@ class ClientModelOld(models.Model):
         max_length=2,
         choices=type_document_choise
     )
+
     # cash_payment = models.BooleanField(default=False)
     # payment_to_credit = models.BooleanField(default=False)
     # bills_receivable= models.IntegerField()
@@ -70,7 +74,13 @@ class ClientModel(models.Model):
         help_text='Documento',
         unique=True
     )
+    profile = models.ImageField(
+        'profile',
+        upload_to='profile',
+    )  # imagen principal del producto
     date_received = models.DateTimeField(auto_now_add=True)
+
+    objects = ClientManager()
 
     def __str__(self) -> str:
         return '{}'.format(self.name)
@@ -88,7 +98,16 @@ class MonitoreoModel(models.Model):
         ('0', 'Contado'),
         ('1', 'Credito')
     )
+    type_sales_choise = (
+        ('0', 'Servicios Generales (Obras)'),
+        ('1', 'Productos y Servicios (Video Vigilancia)')
+    )
     client = models.ForeignKey(ClientModel, related_name='monitoreo_cliente', on_delete=models.CASCADE)
+    type_sales = models.CharField(
+        'Tipo de venta',
+        max_length=2,
+        choices=type_sales_choise
+    )
     contracts = models.CharField(
         'Contratos',
         max_length=20
@@ -101,18 +120,18 @@ class MonitoreoModel(models.Model):
     # cash_payment = models.BooleanField(default=False)
     # payment_to_credit = models.BooleanField(default=False)
     payment_notifications = models.BooleanField(default=False)
-    products= models.ManyToManyField(
+    products = models.ManyToManyField(
         ProductModel
     )
-    type_method_products= models.CharField(
+    type_method_products = models.CharField(
         'Tipo pago producto',
         max_length=2,
         choices=type_method_products_choise
     )
-    services= models.ManyToManyField(
+    services = models.ManyToManyField(
         ServiceModel
     )
-    type_method_services= models.CharField(
+    type_method_services = models.CharField(
         'Tipo pago servicio',
         max_length=2,
         choices=type_method_services_choise

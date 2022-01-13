@@ -36,7 +36,6 @@ class ClintesViewsetNew(GenericViewSet):
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class ClintesViewset(viewsets.ViewSet):
     authentication_classes = ()
     permission_classes = ()
