@@ -4,4 +4,4 @@ from .models import ClientModel, MonitoreoModel
 
 
 admin.site.register(ClientModel)
-admin.site.register(MonitoreoModel)
+# admin.site.register(MonitoreoModel)
