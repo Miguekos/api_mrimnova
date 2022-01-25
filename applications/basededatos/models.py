@@ -54,7 +54,7 @@ class ClientModel(models.Model):
     )
     name = models.CharField(
         max_length=20,
-        help_text='Nombre del producto',
+        help_text='Nombres',
         unique=True
     )
     address_main = models.CharField(
@@ -77,6 +77,7 @@ class ClientModel(models.Model):
     profile = models.ImageField(
         'profile',
         upload_to='profile',
+        default="https://cdn.quasar.dev/img/boy-avatar.png"
     )  # imagen principal del producto
     date_received = models.DateTimeField(auto_now_add=True)
 
@@ -144,3 +145,37 @@ class MonitoreoModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Monitoreos"
+
+
+class ProveedorModelo(models.Model):
+    type_document_choise = (
+        ('0', 'DNI'),
+        ('1', 'RUC')
+    )
+    name = models.CharField(
+        max_length=20,
+        help_text='Nombres',
+        unique=True
+    )
+    address_main = models.CharField(
+        max_length=20,
+        help_text='Direccion'
+    )
+    email = models.EmailField(
+        max_length=254
+    )
+    type_document = models.CharField(
+        'Tipo de documento',
+        max_length=2,
+        choices=type_document_choise
+    )
+    document = models.CharField(
+        max_length=20,
+        help_text='Documento',
+        unique=True
+    )
+    profile = models.ImageField(
+        'profile',
+        upload_to='profile',
+    )  # imagen principal del producto
+    date_received = models.DateTimeField(auto_now_add=True)
