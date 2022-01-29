@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from django.utils import timezone, dateformat
 from rest_framework import serializers
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from .models import ClientModel
@@ -26,10 +27,23 @@ class ClintesViewsetNew(GenericViewSet):
         return Response(serializer.data)
         # return self.get_paginated_response(self.paginate_queryset(serializer.data))
 
-    def retrieve(self, request, pk):
-        item = self.get_object()
+    # def retrieve(self, request, pk):
+    #     item = self.get_object()
+    #     serializer = self.get_serializer(item)
+    #     return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        item = get_object_or_404(self.queryset, pk=pk)
         serializer = self.get_serializer(item)
         return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        item = get_object_or_404(self.queryset, pk=pk)
+        serializer = self.get_serializer(item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request):
         item = self.get_object()

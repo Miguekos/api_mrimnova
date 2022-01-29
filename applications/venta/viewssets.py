@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import VentasModelo, ProductModel, ClientModel
 from rest_framework.viewsets import GenericViewSet
 
-from .serializer import VentasSerializer, VentasSerializerPost
+from .serializer import VentasSerializer, VentasSerializerPost, VentasSerializerDetail, VentasSerialezerWithProductList
 
 
 class VentasViewsetNew(GenericViewSet):
@@ -18,10 +18,11 @@ class VentasViewsetNew(GenericViewSet):
     def create(self, request, *args, **kwargs):
         # print("request.data", request.data)
         try:
-            serializer = VentasSerializerPost(data=request.data)
+            serializer = VentasSerialezerWithProductList(data=request.data)
             serializer.is_valid(raise_exception=True)
             # print("asd->", request.data['products'])
             type_sale_validation = request.data['type_sales']
+            # count_product = len(serializer.validated_data["products"])
 
             if type_sale_validation == 0:
                 venta = VentasModelo.objects.create(
@@ -45,12 +46,19 @@ class VentasViewsetNew(GenericViewSet):
             # if type_sale_validation == 1:
             sum_cost = 0
             add_produc = []
-            for productos in request.data['products']:
-                productos_find = ProductModel.objects.get(id=productos)
-                # print("productos_find", productos_find)
-                sum_cost = productos_find.cost + sum_cost
+            product_discount = []
+
+            for index, productos in enumerate(request.data['products']):
+                print("productos", productos)
+                productos_find = ProductModel.objects.get(id=productos['id_pro'])
+                print("productos_find", productos_find)
+                sum_cost = (productos_find.cost * productos['cant']) + sum_cost
                 # print("cost", productos_find.cost)
                 add_produc.append(productos_find)
+
+                producto = productos_find
+                producto.quantity = producto.quantity - productos['cant']
+                product_discount.append(producto)
 
             # print("sum_cost", sum_cost)
             # print("add_produc", add_produc)
@@ -77,6 +85,7 @@ class VentasViewsetNew(GenericViewSet):
             # VentasModelo.objects.create(venta)
             # serializer.save()
             venta.products.set(add_produc)
+            ProductModel.objects.bulk_update(product_discount, ['quantity'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except (Exception, NameError) as e:

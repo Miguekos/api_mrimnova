@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 
 
 class UserCreate(viewsets.ModelViewSet):
-    authentication_classes = ()
-    permission_classes = ()
+    # authentication_classes = ()
+    # permission_classes = ()
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
