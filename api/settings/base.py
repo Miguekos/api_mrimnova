@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fwbxctc)gtz^49(&ksvj&7+_c66evvi(y4a$@iloqib^6t^h6)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+DEBUG = True
 
 # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 CORS_ALLOW_ALL_ORIGINS = True
@@ -155,6 +155,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
+# STATICFILES_DIRS = BASE_DIR / 'static'
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
