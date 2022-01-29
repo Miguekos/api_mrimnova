@@ -29,7 +29,7 @@ class VentasModelo(models.Model):
     contracts = models.ImageField(
         'Contrato Firmado',
         upload_to='contratos',
-        default=""
+        default=None
     )  # imagen principal del producto
     address = models.CharField(
         'Direccion',

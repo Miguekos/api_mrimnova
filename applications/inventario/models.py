@@ -78,7 +78,7 @@ class FacturaModel(TimeStampedModel):
         ('0', 'Factura'),
         ('1', 'Boleta')
     )
-    proveedor = models.ForeignKey(ProveedoresModel,  related_name='factura_producto', on_delete=models.CASCADE)
+    proveedor = models.ForeignKey(ProveedoresModel, related_name='factura_producto', on_delete=models.CASCADE)
     type_invoice = models.CharField(
         'Tipo de pedido',
         max_length=2,
@@ -126,14 +126,23 @@ class ProductModel(TimeStampedModel):
     # TODO: Modelo
 
     date_of_entry = models.DateTimeField('Fecha de entrega')
-    internal_product_code = models.IntegerField('Codigo interno de producto')
-    bar_code = models.IntegerField('Codigo de barra')
+    internal_product_code = models.CharField(
+        'Codigo interno de producto',
+        max_length=100
+    )
+    bar_code = models.CharField(
+        'Codigo de barra',
+        max_length=100
+    )
     # product_address = models.CharField(
     #     'Direccion del producto',
     #     max_length=50,
     # )
     quantity = models.IntegerField('Cantidad')
-    serial_number = models.IntegerField('Numeros de Series / Segun Cantidad')  # Todo: Numero de factura
+    serial_number = models.CharField(
+        'Numeros de Series',
+        max_length=100
+    )
     purchase_cost = models.DecimalField(
         'Costo de Compra',
         max_digits=10,
