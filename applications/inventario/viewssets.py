@@ -96,7 +96,7 @@ class ProductViewset(GenericViewSet):
         serializer = self.get_serializer(item)
         return Response(serializer.data)
 
-    def destroy(self, request):
+    def destroy(self, request, pk):
         item = self.get_object()
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
