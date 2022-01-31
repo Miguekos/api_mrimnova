@@ -7,20 +7,20 @@ from model_utils.models import TimeStampedModel
 
 class ServiceModel(TimeStampedModel):
     name = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Nombre del servicio',
         unique=True
     )
     quantity = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Cantidad',
     )
     term = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Plazo',
     )
     quota = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Cuota',
     )
     active = models.BooleanField(
@@ -28,7 +28,6 @@ class ServiceModel(TimeStampedModel):
         default=True
     )
 
-    date_received = models.DateTimeField()
 
     def __str__(self):
         return "{}".format(self.name)
@@ -43,12 +42,12 @@ class ProveedoresModel(TimeStampedModel):
         ('1', 'RUC')
     )
     name = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Nombres',
         unique=True
     )
     address_main = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Direccion Principal'
     )
     email = models.EmailField(
@@ -60,11 +59,10 @@ class ProveedoresModel(TimeStampedModel):
         choices=type_document_choise
     )
     document = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Documento',
         unique=True
     )
-    date_received = models.DateTimeField()
 
     def __str__(self):
         return "{}".format(self.name)
@@ -85,10 +83,9 @@ class FacturaModel(TimeStampedModel):
         choices=type_invoice_choise_factura
     )
     codigo = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Id de la factura o boleta'
     )
-    date_received = models.DateTimeField()
 
     def __str__(self):
         return "{}".format(self.codigo)
@@ -99,7 +96,7 @@ class FacturaModel(TimeStampedModel):
 
 class ProductModel(TimeStampedModel):
     name = models.CharField(
-        max_length=20,
+        max_length=40,
         help_text='Nombre del producto',
         unique=True
     )
@@ -112,15 +109,15 @@ class ProductModel(TimeStampedModel):
     invoice_relation = models.ForeignKey(FacturaModel, on_delete=models.CASCADE, related_name='producto_factura')
     marca = models.CharField(
         'Marca',
-        max_length=20
+        max_length=40
     )
     modelo = models.CharField(
         'Modelo',
-        max_length=20
+        max_length=40
     )
     code = models.CharField(
         'Codigo de articulo',
-        max_length=20
+        max_length=40
     )
     # TODO: Marca
     # TODO: Modelo
@@ -164,7 +161,7 @@ class ProductModel(TimeStampedModel):
     )
     # type_of_services = models.CharField(
     #     'Tipo de servicio',
-    #     max_length=20
+    #     max_length=40
     # )
     cost = models.DecimalField(
         'Costo de Venta',
@@ -178,10 +175,9 @@ class ProductModel(TimeStampedModel):
     )
     # plans = models.CharField(
     #     'Planes',
-    #     max_length=20,
+    #     max_length=40,
     #     default='Sin planes'
     # )
-    date_received = models.DateTimeField('Creado')
 
     def __str__(self):
         return "{}".format(self.name)

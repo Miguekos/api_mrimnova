@@ -4,8 +4,11 @@ from . import viewssets
 
 router = DefaultRouter()
 
-# router.register(r'mobilestore/v2/colors', viewssets.ColorViewset, basename='colors')
+
+router.register(r'mrinnova/v2/servicios', viewssets.ServiceViewset, basename='servicios')
 router.register(r'mrinnova/v2/productos', viewssets.ProductViewset, basename='productos')
+router.register(r'mrinnova/v2/facturas', viewssets.InvoiceViewset, basename='facturas')
+router.register(r'mrinnova/v2/proveedores', viewssets.ProveeViewset, basename='proveedores')
 
 urlpatterns = router.urls
 

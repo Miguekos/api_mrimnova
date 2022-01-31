@@ -6,14 +6,10 @@ from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.serializers import Serializer
 from rest_framework.viewsets import GenericViewSet
-from .models import ProductModel, FacturaModel
+from .models import ProductModel, FacturaModel, ProveedoresModel, ServiceModel
 
-from .serializer import ProductoSerializer, ProductoSerializerNew
+from .serializer import ProductoSerializer, ProductoSerializerNew, InvoiceSerializer, ServiceSerializer, ProveeSerializer
 
-
-# class ProductViewset(viewsets.ModelViewSet):
-#     serializer_class = ProductoSerializer
-#     queryset = ProductModel.objects.all()
 
 class ProductViewset(GenericViewSet):
     authentication_classes = ()
@@ -100,3 +96,21 @@ class ProductViewset(GenericViewSet):
         item = self.get_object()
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ServiceViewset(viewsets.ModelViewSet):
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = ServiceSerializer
+    queryset = ServiceModel.objects.all()
+
+class InvoiceViewset(viewsets.ModelViewSet):
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = InvoiceSerializer
+    queryset = FacturaModel.objects.all()
+
+class ProveeViewset(viewsets.ModelViewSet):
+    authentication_classes = ()
+    permission_classes = ()
+    serializer_class = ProveeSerializer
+    queryset = ProveedoresModel.objects.all()
