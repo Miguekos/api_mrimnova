@@ -59,7 +59,6 @@ class ProductViewset(GenericViewSet):
                     outflows_sales=serializer.validated_data['outflows_sales'],
                     cost=serializer.validated_data['cost'],
                     description=serializer.validated_data['description'],
-                    date_received=timezone.now(),
                     date_of_entry=timezone.now(),
                     id_invoice=factura
                 )
