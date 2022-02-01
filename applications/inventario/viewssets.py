@@ -61,7 +61,7 @@ class ProductViewset(GenericViewSet):
                     description=serializer.validated_data['description'],
                     date_received=timezone.now(),
                     date_of_entry=timezone.now(),
-                    invoice_relation=factura
+                    id_invoice=factura
                 )
                 # print("pruductos_por_seriales", pruductos_por_seriales)
                 products_ready.append(pruductos_por_seriales)

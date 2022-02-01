@@ -106,7 +106,7 @@ class ProductModel(TimeStampedModel):
     #     ('2', 'Guia de Remisión'),
     # )
     # code_type = models.CharField('Tipo de registro', choices=code_type_choise, max_length=2, default='Factura')
-    invoice_relation = models.ForeignKey(FacturaModel, on_delete=models.CASCADE, related_name='producto_factura')
+    id_invoice = models.ForeignKey(FacturaModel, on_delete=models.CASCADE, related_name='producto_factura')
     marca = models.CharField(
         'Marca',
         max_length=40
