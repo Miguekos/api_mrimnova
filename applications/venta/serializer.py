@@ -26,7 +26,17 @@ class VentasSerializer(serializers.ModelSerializer):
             "materials",
             "cost",
             "quote",
-            "products"
+            "products",
+            "type_method_products",
+            "down_payment_producto_cre",
+            "quotas_producto_cre",
+            "services",
+            "type_method_services",
+            "down_payment_servicios_cre",
+            "quotas_servicios_cre",
+            "bills_receivable",
+            "payment_notifications",
+            "date_received",
         ]
 
 
@@ -35,8 +45,8 @@ class VentasSerializerPost(serializers.ModelSerializer):
         model = VentasModelo
         fields = ('__all__')
 
-class VentasSerializerDetail(serializers.ModelSerializer):
 
+class VentasSerializerDetail(serializers.ModelSerializer):
     class Meta:
         model = VentasModelo
         fields = (
@@ -65,9 +75,11 @@ class VentasSerializerDetail(serializers.ModelSerializer):
         # class Meta:
         #     products = Nuevoobjeto
 
+
 class DictValidate(serializers.Serializer):
     id_pro = serializers.IntegerField(read_only=True)
     cant = serializers.IntegerField(read_only=True)
+
 
 class VentasSerialezerWithProductList(VentasSerializerDetail):
     products = DictValidate(many=True)
