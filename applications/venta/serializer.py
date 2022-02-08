@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from datetime import timedelta
 from .models import ClientModel, ProductModel, ServiceModel, VentasModelo
 
 from applications.basededatos.serializer import ClientSerializerPost
@@ -8,6 +9,7 @@ from applications.inventario.serializer import ProductoSerializer
 class VentasSerializer(serializers.ModelSerializer):
     client = ClientSerializerPost()
     products = ProductoSerializer(many=True)
+    date_received_parse = serializers.SerializerMethodField()
     type_sales_name = serializers.CharField(
         source='get_type_sales_display', read_only=True
     )
@@ -37,7 +39,11 @@ class VentasSerializer(serializers.ModelSerializer):
             "bills_receivable",
             "payment_notifications",
             "date_received",
+            "date_received_parse",
         ]
+
+    def get_date_received_parse(self, obj):
+        return "{}".format((obj.date_received - timedelta(hours=5)).strftime("%d/%m/%Y, %H:%M"))
 
 
 class VentasSerializerPost(serializers.ModelSerializer):
