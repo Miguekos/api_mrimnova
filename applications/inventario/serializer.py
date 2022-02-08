@@ -41,7 +41,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
         return obj.proveedor.name
 
     def get_created_parse(self, obj):
-        return "{}".format((obj.created - timedelta(hours=5)).strftime("%m/%d/%Y, %H:%M"))
+        return "{}".format((obj.created - timedelta(hours=5)).strftime("%d/%m/%Y, %H:%M"))
 
 
 class ProductoSerializer(serializers.ModelSerializer):
